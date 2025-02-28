@@ -6,8 +6,18 @@ export function updateTheme(value: Appearance) {
     if (value === 'system') {
         const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         document.documentElement.classList.toggle('dark', systemTheme === 'dark');
+        // Update logo based on system theme
+        const logoElement = document.querySelector('img[alt="Logo"]') as HTMLImageElement;
+        if (logoElement) {
+            logoElement.src = systemTheme === 'dark' ? '/NVT LOGO B.png' : '/NVT LOGO W.png';
+        }
     } else {
         document.documentElement.classList.toggle('dark', value === 'dark');
+        // Update logo based on manual theme selection
+        const logoElement = document.querySelector('img[alt="Logo"]') as HTMLImageElement;
+        if (logoElement) {
+            logoElement.src = value === 'dark' ? '/NVT LOGO B.png' : '/NVT LOGO W.png';
+        }
     }
 }
 
